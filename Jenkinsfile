@@ -7,9 +7,9 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('Source Code') {
             steps {
-                git 'https://github.com/frank241/pet-clinic.git'
+                git branch: 'main', url: 'https://github.com/frank241/pet-clinic.git', branch: 'main'
             }
         }
 
