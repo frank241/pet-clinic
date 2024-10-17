@@ -45,13 +45,15 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('test docker push') {
             steps {
-                dir('docker-oci-examples/docker-example/'){
-                   jf 'rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
-                }
+                sh '''
+                docker login jftest2.jfrog.io -u "fdouckagha@vmware.com" -p "Passer1234!"
+                docker push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+                '''
             }
         }
+
 
     }
     
