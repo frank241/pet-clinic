@@ -47,9 +47,12 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                sh 'jf rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
+                dir('docker-oci-examples/docker-example/'){
+                    jf 'rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
+                }
             }
         }
+
     }
     
     post {
