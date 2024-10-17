@@ -10,6 +10,8 @@ pipeline {
         IMAGE_NAME = "spring-petclinic"
         IMAGE_TAG = "${BUILD_ID}"
         DOCKER_REPO = "jftest2.jfrog.io/jftest2-docker"
+        DOCKER_USERNAME = credentials('docker-username')
+        DOCKER_PASSWORD = credentials('docker-password')
     }
 
     stages {
@@ -48,7 +50,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 sh '''
-                echo "$DOCKER_PASSWORD" | docker login jftest2.jfrog.io -u "$DOCKER_USENAME" --password-stdin
+                echo "$DOCKER_PASSWORD" | docker login jftest2.jfrog.io -u "$DOCKER_USERNAME" --password-stdin
                 docker push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
                 '''
             }
@@ -60,6 +62,12 @@ pipeline {
     post {
         always {
             echo 'Pipeline complete.'
+        }
+        success {
+            echo 'Pipeline executed successfully.'
+        }
+        failure {
+            echo 'Pileline failed.'
         }
     }
 }
