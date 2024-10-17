@@ -48,7 +48,7 @@ pipeline {
         stage('test docker push') {
             steps {
                 sh '''
-                docker login jftest2.jfrog.io -u "fdouckagha@vmware.com" -p "Passer1234!"
+                docker login jftest2.jfrog.io -u "$DOCKER_USENAME" -p "$DOCKER_PASSWORD"
                 docker push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
                 '''
             }
