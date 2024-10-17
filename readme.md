@@ -22,6 +22,10 @@ Once the Docker image is pushed to artifactory, we can run it with the command:
 docker run -p 8081:8080 jftest2.jfrog.io/jftest2-docker/spring-petclinic:<IMAGE_TAG>
 
 Replace <IMAGE_TAG> with the actual image tag (e.g., 28)
+
+
+
+
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
