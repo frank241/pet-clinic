@@ -2,8 +2,14 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // Configure Maven in Jenkins under Global Tool Configuration
-        jdk 'JDK 17'   // Configure JDK 17 in Jenkins
+        maven 'Maven'
+        jdk 'JDK 17'
+        jfrog 'jfrog-cli'   
+    }
+    environment {
+        IMAGE_NAME = "spring-petclinic"
+        IMAGE_TAG = "${BUILD_ID}"
+        DOCKER_REPO = "artifactory/api/docker/jftest2-docker"
     }
 
     stages {
@@ -34,8 +40,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('spring-petclinic')
+                    def dockerImage = docker.build("${ARTIFACTORY_DOCKER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}", '.')
                 }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                sh './jfrog rt docker-push ${ARTIFACTORY_DOCKER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}'
             }
         }
     }
