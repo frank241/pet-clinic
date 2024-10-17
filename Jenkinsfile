@@ -48,7 +48,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 sh '''
-                docker login jftest2.jfrog.io -u "$DOCKER_USENAME" -p "$DOCKER_PASSWORD"
+                echo "$DOCKER_PASSWORD" | docker login jftest2.jfrog.io -u "$DOCKER_USENAME" -p --password-stdin
                 docker push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
                 '''
             }
