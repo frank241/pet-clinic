@@ -9,7 +9,7 @@ pipeline {
     environment {
         IMAGE_NAME = "spring-petclinic"
         IMAGE_TAG = "${BUILD_ID}"
-        DOCKER_REPO = "artifactory/api/docker/jftest2-docker"
+        DOCKER_REPO = "jftest2.jfrog.io/jftest2-docker"
     }
 
     stages {
@@ -48,7 +48,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 dir('docker-oci-examples/docker-example/'){
-                   jf 'rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_REPO}'
+                   jf 'rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
         }
