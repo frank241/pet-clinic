@@ -1,3 +1,27 @@
+## Pipeline with Jenkins
+This project includes a Jenkins pipeline to automate the build, test, and packaging of the Spring PetClinic app. The Jenkinsfile is available in this repo 
+
+### Steps Performed in the Pipeline
+
+1. **Source Code**: Clones the Spring PetClinic source code from GitHub.
+2. **Compile Code**: Uses Maven to compile the project.
+3. **Run Tests**: Executes unit tests using Maven.
+4. **Package as JAR**: Packages the project into a JAR file.
+5. **Build Docker Image**: Builds a Docker image for the Spring PetClinic app.
+6. **Push Docker Image**: Pushes the Docker image to JFrog Artifactory.
+
+### Dependency Resolution
+
+Originally, it was requested that dependencies be resolved from JCenter. However, since JCenter has been sunset, **Maven Central** is used as the dependency repository in this project.
+
+### Running the Docker Image
+
+Once the Docker image is pushed to artifactory, we can run it with the command:
+
+```bash
+docker run -p 8081:8080 jftest2.jfrog.io/jftest2-docker/spring-petclinic:<IMAGE_TAG>
+
+Replace <IMAGE_TAG> with the actual image tag (e.g., 28)
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
@@ -160,28 +184,3 @@ For pull requests, editor preferences are available in the [editor config](.edit
 ## License
 
 The Spring PetClinic sample application is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
-
-## Pipeline with Jenkins
-This project includes a Jenkins pipeline to automate the build, test, and packaging of the Spring PetClinic app. The Jenkinsfile is available in this repo 
-
-### Steps Performed in the Pipeline
-
-1. **Source Code**: Clones the Spring PetClinic source code from GitHub.
-2. **Compile Code**: Uses Maven to compile the project.
-3. **Run Tests**: Executes unit tests using Maven.
-4. **Package as JAR**: Packages the project into a JAR file.
-5. **Build Docker Image**: Builds a Docker image for the Spring PetClinic app.
-6. **Push Docker Image**: Pushes the Docker image to JFrog Artifactory.
-
-### Dependency Resolution
-
-Originally, it was requested that dependencies be resolved from JCenter. However, since JCenter has been sunset, **Maven Central** is used as the dependency repository in this project.
-
-### Running the Docker Image
-
-Once the Docker image is pushed, we can run it with the command:
-
-```bash
-docker run -p 8081:8080 jftest2.jfrog.io/jftest2-docker/spring-petclinic:<IMAGE_TAG>
-
-Replace <IMAGE_TAG> with the actual image tag (e.g., 28)
