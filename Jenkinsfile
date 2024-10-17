@@ -40,14 +40,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("${ARTIFACTORY_DOCKER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}", '.')
+                    def dockerImage = docker.build("${DOCKER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}", '.')
                 }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh './jfrog rt docker-push ${ARTIFACTORY_DOCKER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}'
+                sh './jfrog rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}'
             }
         }
     }
