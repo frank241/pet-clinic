@@ -47,7 +47,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                sh './jfrog rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
+                sh 'jfrog rt docker-push ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
             }
         }
     }
